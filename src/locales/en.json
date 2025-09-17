@@ -1,1 +1,14 @@
-{}
+{
+    "welcome":"Welcome to the app",
+    "logout": "Log Out",
+    "deletaAccount":"Delete account",
+    "confirmDelete":"Are you sure do you want delete your account?",
+    "cancel":"Cancel",
+    "delete":"Delete",
+    "login":"Realize Login",
+    "password":"Password",
+    "forgotPass":"Forgot Password?",
+    "register":"Register",
+    "message":"Message Tests",
+    "changePass":"Change password"    
+}   
