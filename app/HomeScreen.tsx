@@ -8,7 +8,9 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
+  
 } from "react-native";
+import { Link } from 'expo-router';
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -242,6 +244,8 @@ export default function HomeScreen() {
           onChangeText={(value) => setTitle(value)}
           onSubmitEditing={salvarItem}
         />
+<Link href="SettingsScreen" style={{ marginTop: 20, color:colors.text, marginLeft: 150 }}>Configurações</Link> 
+
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
