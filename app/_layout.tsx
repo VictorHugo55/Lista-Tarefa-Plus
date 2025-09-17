@@ -10,6 +10,5 @@ export default function Layout() {
         <Stack screenOptions={{ headerShown: false }} />
       </ThemeProvider>
     </I18nextProvider>
-    
   );
 }
