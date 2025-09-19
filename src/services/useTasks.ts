@@ -9,12 +9,16 @@ import {
   deleteDoc,
   doc,
 } from "./firebaseConfig";
+import { Timestamp } from "firebase/firestore";
 
 export interface Task {
   id: string;
   title: string;
   description: string;
   completed: boolean;
+  dueDate: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }
 
 export function useTasks() {
@@ -23,7 +27,7 @@ export function useTasks() {
 
   const tasksCollection = collection(db, "tasks");
 
-  // 🔹 Buscar tarefas
+  // 🔹 Buscar todas as tarefas
   const fetchTasks = async () => {
     try {
       setLoading(true);
@@ -43,30 +47,47 @@ export function useTasks() {
     }
   };
 
-  // 🔹 Criar
-  const createTask = async (task: Omit<Task, "id">) => {
+  // 🔹 Criar nova tarefa
+  const createTask = async (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => {
     try {
-      const docRef = await addDoc(tasksCollection, task);
-      setTasks((prev) => [...prev, { ...task, id: docRef.id }]);
+      const now = Timestamp.now();
+      const docRef = await addDoc(tasksCollection, {
+        ...task,
+        completed: false,
+        createdAt: now,
+        updatedAt: now,
+      });
+      setTasks((prev) => [
+        ...prev,
+        {
+          ...task,
+          completed: false,
+          createdAt: now,
+          updatedAt: now,
+          id: docRef.id,
+        },
+      ]);
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
     }
   };
 
-  // 🔹 Atualizar
+  // 🔹 Atualizar tarefa
   const updateTask = async (id: string, task: Partial<Task>) => {
     try {
       const taskRef = doc(db, "tasks", id);
-      await updateDoc(taskRef, task);
+      await updateDoc(taskRef, { ...task, updatedAt: Timestamp.now() });
       setTasks((prev) =>
-        prev.map((t) => (t.id === id ? { ...t, ...task } : t))
+        prev.map((t) =>
+          t.id === id ? { ...t, ...task, updatedAt: Timestamp.now() } : t
+        )
       );
     } catch (error) {
       console.error("Erro ao atualizar tarefa:", error);
     }
   };
 
-  // 🔹 Deletar
+  // 🔹 Deletar tarefa
   const deleteTask = async (id: string) => {
     try {
       const taskRef = doc(db, "tasks", id);
