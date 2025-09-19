@@ -209,6 +209,8 @@ export default function HomeScreen() {
         />
         {/* <Button title="Enviar notificação" color='purple' onPress={dispararNotificacao} /> */}
 
+        <Link href="TasksScreen" style={{ marginTop: 20, color:colors.text, marginLeft: 150 }}>Tasks</Link> 
+
         {expoPushToken ? (
           <Text>Token Gerado:{expoPushToken}</Text>
         ) : (

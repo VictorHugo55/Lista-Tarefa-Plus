@@ -21,9 +21,8 @@ const firebaseConfig = {
   storageBucket: "fir-auth-538b0.firebasestorage.app",
   messagingSenderId: "704230853110",
   appId: "1:704230853110:web:0841c1b0eb75374d25dfd7",
-  measurementId: "G-E8G54HZ2PM",
+  measurementId: "G-E8G54HZ2PM"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

@@ -1,113 +1,84 @@
-// hooks/useTasks.ts
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  db,
   collection,
-  addDoc,
   getDocs,
+  addDoc,
   updateDoc,
   deleteDoc,
   doc,
-} from "./firebaseConfig";
-import { Timestamp } from "firebase/firestore";
+  onSnapshot,
+  query,
+  orderBy,
+  FirestoreError,
+} from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
-export interface Task {
-  id: string;
+// Tipagem da task
+export type Task = {
+  id?: string;
   title: string;
   description: string;
-  completed: boolean;
   dueDate: string;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
-}
+  completed: boolean;
+};
 
-export function useTasks() {
+export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const tasksCollection = collection(db, "tasks");
 
-  // 🔹 Buscar todas as tarefas
-  const fetchTasks = async () => {
+  // Busca tasks em tempo real
+  useEffect(() => {
+    const q = query(tasksCollection, orderBy("dueDate", "asc"));
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const list: Task[] = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Task[];
+        setTasks(list);
+        setLoading(false);
+      },
+      (error: FirestoreError) => {
+        console.error("Erro ao buscar tarefas:", error);
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  // Criar tarefa
+  const createTask = async (task: Omit<Task, "id">) => {
     try {
-      setLoading(true);
-      const snapshot = await getDocs(tasksCollection);
-      const data = snapshot.docs.map(
-        (d) =>
-          ({
-            id: d.id,
-            ...d.data(),
-          } as Task)
-      );
-      setTasks(data);
+      await addDoc(tasksCollection, task);
     } catch (error) {
-      console.error("Erro ao buscar tarefas:", error);
-    } finally {
-      setLoading(false);
+      console.error("Erro ao adicionar tarefa:", error);
+      console.log("Erro ao adicionar tarefa:", error);
     }
   };
 
-  // 🔹 Criar nova tarefa
-  const createTask = async (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => {
-    try {
-      const now = Timestamp.now();
-      const docRef = await addDoc(tasksCollection, {
-        ...task,
-        completed: false,
-        createdAt: now,
-        updatedAt: now,
-      });
-      setTasks((prev) => [
-        ...prev,
-        {
-          ...task,
-          completed: false,
-          createdAt: now,
-          updatedAt: now,
-          id: docRef.id,
-        },
-      ]);
-    } catch (error) {
-      console.error("Erro ao criar tarefa:", error);
-    }
-  };
-
-  // 🔹 Atualizar tarefa
+  // Atualizar tarefa
   const updateTask = async (id: string, task: Partial<Task>) => {
     try {
       const taskRef = doc(db, "tasks", id);
-      await updateDoc(taskRef, { ...task, updatedAt: Timestamp.now() });
-      setTasks((prev) =>
-        prev.map((t) =>
-          t.id === id ? { ...t, ...task, updatedAt: Timestamp.now() } : t
-        )
-      );
+      await updateDoc(taskRef, task);
     } catch (error) {
       console.error("Erro ao atualizar tarefa:", error);
     }
   };
 
-  // 🔹 Deletar tarefa
+  // Deletar tarefa
   const deleteTask = async (id: string) => {
     try {
       const taskRef = doc(db, "tasks", id);
       await deleteDoc(taskRef);
-      setTasks((prev) => prev.filter((t) => t.id !== id));
     } catch (error) {
       console.error("Erro ao deletar tarefa:", error);
     }
   };
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  return {
-    tasks,
-    loading,
-    createTask,
-    updateTask,
-    deleteTask,
-    fetchTasks,
-  };
-}
+  return { tasks, loading, createTask, updateTask, deleteTask };
+};
