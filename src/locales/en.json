@@ -1,14 +1,29 @@
 {
-    "welcome":"Welcome to the app",
+    "welcome":"Welcome to the TaskPlus",
+    "tasksList":"Taks List",
+    "settings":"Settings",
+    "newTask":"+ New Task",
     "logout": "Log Out",
     "deletaAccount":"Delete account",
-    "confirmDelete":"Are you sure do you want delete your account?",
+    "confirmDelete":"Confirm Delete?",
     "cancel":"Cancel",
     "delete":"Delete",
     "login":"Realize Login",
     "password":"Password",
     "forgotPass":"Forgot Password?",
     "register":"Register",
+    "countion":{
+        "countion1":"Are you sure you want to delete your account? This action cannot be undone!"
+    },
+    "error":"Error",
+    "verify":{
+        "v1":"Check the email and password you entered."
+    },
+    "recovery":{
+        "r1":"Enter email to recover password",
+        "r2":"Recovery email sent",
+        "r3":"Error sending email. Please check if the email is correct."
+    },
     "message":"Message Tests",
     "changePass":"Change password"    
 }   

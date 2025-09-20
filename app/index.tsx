@@ -44,7 +44,7 @@ export default function LoginScreen() {
 // Função para simular o envio do formulário
 const handleLogin = () => {
   if (!email || !senha) {
-    Alert.alert(t("errors.error1"));
+    Alert.alert(t("attention"), t("errors.error1"));
     return;
   }
   //Função para realizar o login
@@ -59,7 +59,7 @@ const handleLogin = () => {
       const errorMessage = error.message
       console.log("Error Mensagem: ",errorMessage)
       if(error.code === 'auth/invalid-credential'){
-        Alert.alert("Error","Verifique email e senha digitados.")
+        Alert.alert(t("error"),t("verify.v1"))
       }
     })
 };
@@ -67,11 +67,11 @@ const handleLogin = () => {
 //Função enviar o e-mail de reset de senha para o usuário
 const esqueceuSenha = ()=>{
   if(!email){
-    alert("Digite o email para recuperar a senha")
+    alert("recovery.r1")
     return
   }
   sendPasswordResetEmail(auth,email)
-    .then(()=>{alert("Enviado e-mail de recuperação")})
+    .then(()=>{alert(t("recovery.r2"))})
     .catch((error)=>{
       console.log("Error ao enviar email",error.message)
       alert("Erro ao enviar e-mail. Verifique se o email está correto.")
@@ -115,30 +115,8 @@ return (
       
     </View>
    
-    <View style={{flexDirection:'row', justifyContent:'center',marginBottom:15}}>
-      <TouchableOpacity 
-        onPress={()=>mudarIdioma('pt')}
-        style={[styles.botao,{backgroundColor:'#d2e00c',marginRight:10}]}
-      >
-
-        <Text>PT</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity 
-        onPress={()=>mudarIdioma('en')}
-        style={[styles.botao,{backgroundColor:'#450ce0',marginRight:10}]}
-      >
-
-        <Text>EN</Text>
-      </TouchableOpacity>
-
-       <TouchableOpacity 
-        onPress={()=>mudarIdioma('es')}
-        style={[styles.botao,{backgroundColor:'#ec2409',marginRight:10}]}
-      >
-        <Text>ES</Text>
-      </TouchableOpacity>
-    </View>
+    
+    
 
     {/* Botão */}
 
@@ -146,8 +124,6 @@ return (
     <TouchableOpacity style={[styles.botao,{backgroundColor:colors.button}]} onPress={handleLogin}>
       <Text style={styles.textoBotao}>Login</Text>
     </TouchableOpacity>
-
-    <ThemeToggleButton/>
 
     <Link href="CadastrarScreen" style={{ marginTop: 20, color:colors.text, marginLeft: 150 }}>{t('register')}</Link>    
 

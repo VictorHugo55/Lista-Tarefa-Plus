@@ -1,17 +1,33 @@
 {
-    "welcome":"seja bem-vindo á aplicação",
+    "welcome":"seja bem-vindo á TarefaPlus",
+    "tasksList":"Lista de Tarefas",
+    "newTask":"+ Nova Tarefa",
+    "settings":"Configurações",
     "logout": "Sair da conta",
     "deletaAccount":"Excluir Conta",
-    "confirmDelete":"Tem certeza que deseja excluir a conta",
+    "confirmDelete":"Excluir Conta?",
     "cancel":"Cacelar",
     "delete":"Excluir",
     "login":"Realizar Login",
     "password":"Senha",
     "forgotPass":"Esquecue a Senha?",
     "register":"Cadastre-se",
-    "message":"Erro",
+    "countion":{
+        "countion1":"Tem certeza que deseja excluir sua conta? Esta ação não poderá ser desfeita!"
+    },
+    "attention":"Atenção",
+    "error":"Erro",
     "errors":{
         "error1":"Teste Erro1"
     },
+    "verify":{
+        "v1":"Verifique email e senha digitados."
+    },
+    "recovery":{
+        "r1":"Digite o email para recuperar a senha",
+        "r2":"Enviado e-mail de recuperação",
+        "r3":"Erro ao enviar e-mail. Verifique se o email está correto."
+    },
+
     "changePass":"alterar senha"
 }

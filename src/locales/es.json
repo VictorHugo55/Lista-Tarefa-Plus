@@ -7,6 +7,7 @@
     "delete":"Borrar",
     "login":"Acceso",
     "password":"Contraseña",
+    
     "forgotPass":"¿Has olvidado tu contraseña?",
     "register":"Registro",
     "changePass":"cambiar la contraseña"   

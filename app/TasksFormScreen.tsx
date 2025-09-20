@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Switch, Alert, Pressable } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useTasks, Task } from "../src/services/useTasks";
+import { useTheme } from "../src/context/ThemeContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Tipagem dos parâmetros de rota (task passada como JSON)
 type TaskFormParams = {
@@ -11,6 +13,7 @@ type TaskFormParams = {
 export default function TasksFormScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<TaskFormParams>();
+  const {colors} = useTheme();
 
   const { createTask, updateTask } = useTasks();
 
@@ -49,33 +52,36 @@ export default function TasksFormScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Título:</Text>
+    <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
+      <Text style={[styles.label, {color:colors.text}]}>Título:</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={title}
         onChangeText={setTitle}
+        placeholderTextColor={colors.inputText}
         placeholder="Digite o título"
       />
 
-      <Text style={styles.label}>Descrição:</Text>
+      <Text style={[styles.label, {color:colors.text}]}>Descrição:</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={description}
         onChangeText={setDescription}
+        placeholderTextColor={colors.inputText}
         placeholder="Digite a descrição"
       />
 
-      <Text style={styles.label}>Prazo:</Text>
+      <Text style={[styles.label, {color:colors.text}]}>Prazo:</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={dueDate}
         onChangeText={setDueDate}
+        placeholderTextColor={colors.inputText}
         placeholder="AAAA-MM-DD"
       />
 
       <View style={styles.switchContainer}>
-        <Text>Concluída:</Text>
+        <Text style={[styles.switchContainer,{color:colors.text}]}>Concluída:</Text>
         <Switch value={completed} onValueChange={setCompleted} />
       </View>
 
@@ -85,7 +91,7 @@ export default function TasksFormScreen() {
             </Text>
         </Pressable>
 
-    </View>
+    </SafeAreaView>
   );
 }
 
