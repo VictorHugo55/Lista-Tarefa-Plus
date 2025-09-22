@@ -74,7 +74,7 @@ const esqueceuSenha = ()=>{
     .then(()=>{alert(t("recovery.r2"))})
     .catch((error)=>{
       console.log("Error ao enviar email",error.message)
-      alert("Erro ao enviar e-mail. Verifique se o email está correto.")
+      alert(t("recovery.r3"))
     })
 }
 
@@ -106,7 +106,7 @@ return (
         { backgroundColor:colors.input,
           color:colors.inputText}
       ]}
-      placeholder={t('password')}
+      placeholder={t('pass.password')}
       placeholderTextColor={colors.inputText}
       secureTextEntry={true}
       value={senha}
@@ -125,11 +125,11 @@ return (
       <Text style={styles.textoBotao}>Login</Text>
     </TouchableOpacity>
 
-    <Link href="CadastrarScreen" style={{ marginTop: 20, color:colors.text, marginLeft: 150 }}>{t('register')}</Link>    
+    <Link href="CadastrarScreen" style={{ marginTop: 20, color:colors.text, marginLeft: 150 }}>{t("register.register1")}</Link>    
 
      {/* Texto Esqueceu a senha */}
     <Text style={{color:colors.text,justifyContent:"center",marginLeft: 130}} 
-      onPress={esqueceuSenha}>{t("forgotPass")}
+      onPress={esqueceuSenha}>{t("pass.forgotPass")}
     </Text>
   </View>
 

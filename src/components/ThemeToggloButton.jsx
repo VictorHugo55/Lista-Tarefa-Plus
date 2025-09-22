@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { useTheme } from "../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function ThemeToggleButton() {
     const { toggleTheme, colors } = useTheme();
+    const {t} = useTranslation();
     const isDarkMode = colors.mode === "dark"; // Verifica se o tema é escuro
 
     return (
         <View style={styles.container}>
             <Text style={[styles.text, { color:"black" }]}>
-                Alterar Tema
+                {t("changeTheme")}
             </Text>
             <Switch
                 value={isDarkMode}

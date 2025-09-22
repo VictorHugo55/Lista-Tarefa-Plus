@@ -4,7 +4,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useTasks, Task } from "../src/services/useTasks";
 import { useTheme } from "../src/context/ThemeContext";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useTranslation } from "react-i18next";
 // Tipagem dos parâmetros de rota (task passada como JSON)
 type TaskFormParams = {
   task?: string;
@@ -14,6 +14,7 @@ export default function TasksFormScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<TaskFormParams>();
   const {colors} = useTheme();
+  const {t} = useTranslation();
 
   const { createTask, updateTask } = useTasks();
 
@@ -27,7 +28,7 @@ export default function TasksFormScreen() {
 
   const handleSave = async () => {
     if (!title.trim()) {
-      Alert.alert("Erro", "O título da tarefa é obrigatório!");
+      Alert.alert(t("error"), t("errors.error4"));
       return;
     }
 
@@ -46,48 +47,48 @@ export default function TasksFormScreen() {
       }
       router.back();
     } catch (error) {
-      Alert.alert("Erro", "Ocorreu um erro ao salvar a tarefa.");
+      Alert.alert(t("error"), t("errors.error5"));
       console.log("Erro ao salvar task:", error);
     }
   };
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
-      <Text style={[styles.label, {color:colors.text}]}>Título:</Text>
+      <Text style={[styles.label, {color:colors.text}]}>{t("tasks.tittle")}</Text>
       <TextInput
         style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={title}
         onChangeText={setTitle}
         placeholderTextColor={colors.inputText}
-        placeholder="Digite o título"
+        placeholder={t("tasks.enterTittle")}
       />
 
-      <Text style={[styles.label, {color:colors.text}]}>Descrição:</Text>
+      <Text style={[styles.label, {color:colors.text}]}>{t("tasks.description")}</Text>
       <TextInput
         style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={description}
         onChangeText={setDescription}
         placeholderTextColor={colors.inputText}
-        placeholder="Digite a descrição"
+        placeholder={t("tasks.enterDescription")}
       />
 
-      <Text style={[styles.label, {color:colors.text}]}>Prazo:</Text>
+      <Text style={[styles.label, {color:colors.text}]}>{t("tasks.prompt")}</Text>
       <TextInput
         style={[styles.input, {backgroundColor:colors.input,color:colors.inputText}]}
         value={dueDate}
         onChangeText={setDueDate}
         placeholderTextColor={colors.inputText}
-        placeholder="AAAA-MM-DD"
+        placeholder={t("tasks.date")}
       />
 
       <View style={styles.switchContainer}>
-        <Text style={[styles.switchContainer,{color:colors.text}]}>Concluída:</Text>
+        <Text style={[styles.switchContainer,{color:colors.text}]}>{t("tasks.complete")}</Text>
         <Switch value={completed} onValueChange={setCompleted} />
       </View>
 
         <Pressable style={styles.saveButton} onPress={handleSave}>
             <Text style={styles.saveButtonText}>
-                {taskToEdit ? "Atualizar Tarefa" : "Adicionar Tarefa"}
+                {taskToEdit ? t("tasks.upTask") : t("tasks.addTask")}
             </Text>
         </Pressable>
 

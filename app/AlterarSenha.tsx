@@ -4,10 +4,12 @@ import { createUserWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCr
 import { auth } from '../src/services/firebaseConfig'
 import { useRouter } from 'expo-router';
 import { useTheme } from '../src/context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function CadastroScreen() {
   const {colors} = useTheme()
+  const {t} = useTranslation();
   // Estados para armazenar os valores digitados
   const [novaSenha, setNovaSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
@@ -18,23 +20,23 @@ export default function CadastroScreen() {
   // Função para realizar update de senha
   const handleAlterarSenha = async() => {
     if (!novaSenha || !confirmarSenha || !senhaAtual) {
-      Alert.alert('Atenção', 'Preencha todos os campos!');
+      Alert.alert(t("attention"), t("errors.error1"));
       return;
     }
     //Verificar se a nova senha é igual a confirmação da senha
     if(novaSenha!== confirmarSenha){
-        Alert.alert("Erro","As senhas não coincidem!")
+        Alert.alert(t("error"),t("errors.error2"))
         return
     }
     //Tratamento do tamanho da senha se for menos 6 caracteres
     if(novaSenha.length<6){
-        Alert.alert("Erro","A nova senha deve ter pelo menos 6 caracteres.")
+        Alert.alert(t("error"),t("errors.error3"))
         return
     }
     try{
         const user = auth.currentUser;
         if(!user || !user.email){
-            Alert.alert("Erro","Nenhum usário logado.")
+            Alert.alert(t("error"),t("countion3"))
             return
         }
         //Cria as credenciais com e-mail e senha atual para reatenticar
@@ -43,7 +45,7 @@ export default function CadastroScreen() {
 
         //Após reautenticar , vamos alterar senha
         await updatePassword(user,novaSenha)
-        Alert.alert("Sucesso","Senha alterada com sucesso!")
+        Alert.alert(t("success"),t("pass.successChange"))
         router.push('/HomeScreen')
     }catch(error){
       console.log("Erro ao alterar senha")
@@ -54,12 +56,12 @@ export default function CadastroScreen() {
 
     return (
       <View style={[styles.container, {backgroundColor: colors.background}]}>
-        <Text style={[styles.titulo, {color: colors.text}]}>Alterar Senha</Text>
+        <Text style={[styles.titulo, {color: colors.text}]}>{t("pass.changePass")}</Text>
 
         {/* Campo Nome */}
         <TextInput
-          style={[styles.input, {backgroundColor: colors.input}]}
-          placeholder="Digite a senha atual"
+          style={[styles.input, {backgroundColor: colors.input, color:colors.inputText}]}
+          placeholder={t("pass.actPass")}
           placeholderTextColor={colors.inputText}
           value={senhaAtual}
           onChangeText={setSenhaAtual}
@@ -67,8 +69,8 @@ export default function CadastroScreen() {
 
         {/* Campo Email */}
         <TextInput
-          style={[styles.input, {backgroundColor: colors.input}]}
-          placeholder="Digite a nova senha"
+          style={[styles.input, {backgroundColor: colors.input, color:colors.inputText}]}
+          placeholder={t("pass.newPass")}
           placeholderTextColor={colors.inputText}
           value={novaSenha}
           onChangeText={setNovaSenha}
@@ -76,8 +78,8 @@ export default function CadastroScreen() {
 
         {/* Campo Senha */}
         <TextInput
-          style={[styles.input, {backgroundColor: colors.input}]}
-          placeholder="Confirme a nova senha"
+          style={[styles.input, {backgroundColor: colors.input, color:colors.inputText}]}
+          placeholder={t("pass.confirmNewPass")}
           placeholderTextColor={colors.inputText}
           value={confirmarSenha}
           onChangeText={setConfirmarSenha}
@@ -85,7 +87,7 @@ export default function CadastroScreen() {
 
         {/* Botão */}
         <TouchableOpacity style={[styles.botao, {backgroundColor: colors.button}]} onPress={handleAlterarSenha}>
-          <Text style={[styles.textoBotao, {color: colors.buttonText}]}>Alterar Senha</Text>
+          <Text style={[styles.textoBotao, {color: colors.buttonText}]}>{t("pass.changePass")}</Text>
         </TouchableOpacity>
       </View>
     );

@@ -2,20 +2,45 @@
     "welcome":"Welcome to the TaskPlus",
     "tasksList":"Taks List",
     "settings":"Settings",
+    "createAccount":"Create Account",
     "newTask":"+ New Task",
     "logout": "Log Out",
     "deletaAccount":"Delete account",
     "confirmDelete":"Confirm Delete?",
+    "excluedAccount":"Conta Excluída",
     "cancel":"Cancel",
     "delete":"Delete",
     "login":"Realize Login",
-    "password":"Password",
-    "forgotPass":"Forgot Password?",
-    "register":"Register",
+    "changeTheme":"Change Theme",
+    "pass":{
+        "password":"Password",
+        "actPass":"Enter current password",
+        "newPass":"Enter the new password",
+        "confirmNewPass":"Confirm new password",
+        "forgotPass":"Forgot Password?",
+        "changePass":"Change password",
+        "successChange":"Password changed successfully!"
+    },
+    "register":{
+        "register1":"Register",
+        "register2":"Register"
+    },
+    
     "countion":{
-        "countion1":"Are you sure you want to delete your account? This action cannot be undone!"
+        "countion1":"Are you sure you want to delete your account? This action cannot be undone!",
+        "countion2":"Your account has been successfully deleted.",
+        "countion3":"No users logged in.",
+        "countion4":"Unable to delete account"
     },
     "error":"Error",
+    "errors":{
+        "error1":"Fill in all fields!",
+        "error2":"Passwords don't match!",
+        "error3":"The new password must be at least 6 characters long.",
+        "error4":"The task title is required!",
+        "error5":"An error occurred while saving the task."
+    },
+
     "verify":{
         "v1":"Check the email and password you entered."
     },
@@ -24,6 +49,18 @@
         "r2":"Recovery email sent",
         "r3":"Error sending email. Please check if the email is correct."
     },
+     "tasks":{
+        "tittle":"Title:",
+        "description":"Description:",
+        "prompt":"Prompt:",
+        "enterTittle":"Enter the title",
+        "enterDescription":"Enter the description",
+        "date":"yyyy-MM-DD",
+        "complete":"Complete:",
+        "addTask":"Add Task",
+        "upTask":"Update Task"
+    },
     "message":"Message Tests",
-    "changePass":"Change password"    
+    "completedName":"Full Name",
+    "success":"Success"    
 }   

@@ -3,22 +3,42 @@
     "tasksList":"Lista de Tarefas",
     "newTask":"+ Nova Tarefa",
     "settings":"Configurações",
+    "createAccount":"Criar Conta",
     "logout": "Sair da conta",
     "deletaAccount":"Excluir Conta",
     "confirmDelete":"Excluir Conta?",
+    "excluedAccount":"Conta Excluída",
     "cancel":"Cacelar",
     "delete":"Excluir",
     "login":"Realizar Login",
-    "password":"Senha",
-    "forgotPass":"Esquecue a Senha?",
-    "register":"Cadastre-se",
+    "changeTheme":"Alterar Tema",
+    "pass":{
+        "password":"Senha",
+        "actPass":"Digite a senha atual",
+        "newPass":"Digite a nova senha",
+        "confirmNewPass":"Confirme a nova senha",
+        "forgotPass":"Esquecue a Senha?",
+        "changePass":"Alterar senha",
+        "successChange":"Senha alterada com sucesso!"
+    },
+    "register":{
+        "register1":"Cadastre-se",
+        "register2":"Cadastrar"
+    },
     "countion":{
-        "countion1":"Tem certeza que deseja excluir sua conta? Esta ação não poderá ser desfeita!"
+        "countion1":"Tem certeza que deseja excluir sua conta? Esta ação não poderá ser desfeita!",
+        "countion2":"Sua conta foi excluída com sucesso.",
+        "countion3":"Nenhum usuário logado.",
+        "countion4":"Não foi possível excluir conta"
     },
     "attention":"Atenção",
     "error":"Erro",
     "errors":{
-        "error1":"Teste Erro1"
+        "error1":"Preencha todos os campos!",
+        "error2":"As senhas não coincidem!",
+        "error3":"A nova senha deve ter pelo menos 6 caracteres.",
+        "error4":"O título da tarefa é obrigatório!",
+        "error5":"Ocorreu um erro ao salvar a tarefa."
     },
     "verify":{
         "v1":"Verifique email e senha digitados."
@@ -28,6 +48,18 @@
         "r2":"Enviado e-mail de recuperação",
         "r3":"Erro ao enviar e-mail. Verifique se o email está correto."
     },
-
-    "changePass":"alterar senha"
+    "tasks":{
+        "tittle":"Título:",
+        "description":"Descrição:",
+        "prompt":"Prazo:",
+        "enterTittle":"Digite o título",
+        "enterDescription":"Digite a descrição",
+        "date":"AAAA-MM-DD",
+        "complete":"Concluída:",
+        "addTask":"Adiconar Tarefa",
+        "upTask":"Atualizar Tarefa"
+    },
+    "message":"Message Tests",
+    "completedName":"Nome Completo",
+    "success":"Sucesso"    
 }

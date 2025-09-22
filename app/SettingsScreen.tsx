@@ -43,14 +43,14 @@ export default function Settings(){
                             if (user) {
                                 await deleteUser(user)//Apaga do firebase Auth
                                 await AsyncStorage.removeItem('@user')
-                                Alert.alert("Conta Excluída", "Sua conta foi excluída com sucesso.")
+                                Alert.alert(t("excluedAccount"), t("countion.countion2"))
                                 router.replace('/')
                             } else {
-                                Alert.alert("Erro", "Nenhum usuário logado.")
+                                Alert.alert(t("error"),t("countion.countion3"))
                             }
                         } catch (error) {
                             console.log("Erro ao excluir conta.")
-                            Alert.alert("Error", "Não foi possível excluir conta")
+                            Alert.alert(t("error"),t("countion.countion4"))
                         }
                     }
                 }
@@ -65,19 +65,15 @@ export default function Settings(){
                 behavior={Platform.OS === "ios" ? "padding" : "height"} //No ios é utilizado padding, e no android o height
                 keyboardVerticalOffset={20} //Descola o conteúdo na vertical em 20 pixel
             >
-            
-                    <ThemeToggleButton />
-<Button title={t("logout")} onPress={realizarLogoff} />
-            <Button title={t("deletaAccount")} color='red' onPress={excluirConta} />
-            <Button title={t("changePass")} onPress={() => router.push("/AlterarSenha")} />
-                    <Button
-                        
-                        title={i18n.language === "pt" ? "Mudar para Inglês" : "Switch to Portuguese"}
-                        onPress={toggleLanguage}
-                        color={colors.primary}
-                        
-                    />
-                
+                <ThemeToggleButton />
+                <Button title={t("logout")} onPress={realizarLogoff} />
+                <Button title={t("deletaAccount")} color='red' onPress={excluirConta} />
+                <Button title={t("pass.changePass")} onPress={() => router.push("/AlterarSenha")} />
+                <Button            
+                    title={i18n.language === "pt" ? "Mudar para Inglês" : "Switch to Portuguese"}
+                    onPress={toggleLanguage}
+                    color={colors.primary} 
+                />    
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
