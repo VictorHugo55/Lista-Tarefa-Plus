@@ -12,12 +12,12 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={[styles.welcomeText, { color: colors.text }]}>
-        {t("welcome") || "Bem-vindo ao TarefaPlus"}
+        {t("welcome")}
       </Text>
 
       <View style={styles.buttonContainer}>
         <Button
-          title={t("tasksList") || "Lista de Tarefas"}
+          title={t("tasksList")}
           onPress={() => router.push("/TasksScreen")}
           color={colors.primary}
         />
@@ -25,7 +25,7 @@ export default function HomeScreen() {
 
       <View style={styles.buttonContainer}>
         <Button
-          title={t("settings") || "Configurações"}
+          title={t("settings")}
           onPress={() => router.push("/SettingsScreen")}
           color={colors.primary}
         />
