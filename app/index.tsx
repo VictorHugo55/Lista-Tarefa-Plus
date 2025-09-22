@@ -67,7 +67,7 @@ const handleLogin = () => {
 //Função enviar o e-mail de reset de senha para o usuário
 const esqueceuSenha = ()=>{
   if(!email){
-    alert("recovery.r1")
+    alert(t("recovery.r1"))
     return
   }
   sendPasswordResetEmail(auth,email)
